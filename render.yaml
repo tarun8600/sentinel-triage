@@ -1,0 +1,32 @@
+# Deploy with one click: https://render.com/deploy?repo=https://github.com/tarun8600/sentinel-triage
+# After the backend deploys, set VITE_API_URL on the dashboard service to the
+# backend's public URL (e.g. https://sentinel-triage-api.onrender.com) and redeploy it.
+services:
+  - type: web
+    name: sentinel-triage-api
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: NEBIUS_API_KEY
+        sync: false # set in the Render dashboard (never commit keys)
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: NEBIUS_BASE_URL
+        value: https://api.tokenfactory.nebius.com/v1
+      - key: NEMOTRON_FAST_MODEL
+        value: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
+      - key: NEMOTRON_REASONING_MODEL
+        value: nvidia/Nemotron-3-Ultra-550b-a55b
+
+  - type: web
+    name: sentinel-triage-dashboard
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    plan: free
+    envVars:
+      - key: VITE_API_URL
+        value: https://sentinel-triage-api.onrender.com # update after backend deploy
