@@ -7,6 +7,7 @@ services:
     runtime: docker
     rootDir: backend
     dockerfilePath: ./Dockerfile
+    plan: free
     envVars:
       - key: NEBIUS_API_KEY
         sync: false # set in the Render dashboard (never commit keys)
@@ -25,7 +26,6 @@ services:
     rootDir: frontend
     buildCommand: npm ci && npm run build
     staticPublishPath: ./dist
-    plan: free
     envVars:
       - key: VITE_API_URL
         value: https://sentinel-triage-api.onrender.com # update after backend deploy
