@@ -7,7 +7,6 @@ services:
     runtime: docker
     rootDir: backend
     dockerfilePath: ./Dockerfile
-    plan: free
     envVars:
       - key: NEBIUS_API_KEY
         sync: false # set in the Render dashboard (never commit keys)
