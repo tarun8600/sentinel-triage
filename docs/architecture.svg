@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" font-family="Inter, 'Segoe UI', system-ui, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#8b93a7"/>
+    </marker>
+    <linearGradient id="cardBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b2130"/>
+      <stop offset="1" stop-color="#141926"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="720" fill="#0d1117"/>
+
+  <text x="600" y="48" text-anchor="middle" fill="#e8ecf4" font-size="30" font-weight="700">Sentinel Triage — Architecture</text>
+  <text x="600" y="74" text-anchor="middle" fill="#8b93a7" font-size="15">AI SOC analyst agent · Nebius × NVIDIA Global AI Hackathon</text>
+
+  <!-- Alert sources -->
+  <g>
+    <rect x="40" y="130" width="200" height="150" rx="12" fill="url(#cardBg)" stroke="#2a3348" stroke-width="1.5"/>
+    <text x="140" y="160" text-anchor="middle" fill="#e8ecf4" font-size="16" font-weight="600">Alert Sources</text>
+    <text x="140" y="190" text-anchor="middle" fill="#9aa3b8" font-size="13">Splunk / CrowdStrike</text>
+    <text x="140" y="210" text-anchor="middle" fill="#9aa3b8" font-size="13">style JSON alerts</text>
+    <text x="140" y="238" text-anchor="middle" fill="#9aa3b8" font-size="13">Mock alert generator</text>
+    <text x="140" y="258" text-anchor="middle" fill="#9aa3b8" font-size="13">(zero-setup demo)</text>
+  </g>
+
+  <!-- FastAPI backend pipeline -->
+  <g>
+    <rect x="300" y="110" width="560" height="400" rx="14" fill="none" stroke="#2f3b52" stroke-width="1.5" stroke-dasharray="6 5"/>
+    <text x="580" y="136" text-anchor="middle" fill="#8b93a7" font-size="13" letter-spacing="2">FASTAPI BACKEND</text>
+
+    <!-- Ingest -->
+    <rect x="330" y="160" width="150" height="90" rx="10" fill="url(#cardBg)" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="405" y="190" text-anchor="middle" fill="#e8ecf4" font-size="14" font-weight="600">1 · Ingest</text>
+    <text x="405" y="212" text-anchor="middle" fill="#9aa3b8" font-size="12">Validate &amp; store</text>
+    <text x="405" y="230" text-anchor="middle" fill="#9aa3b8" font-size="12">alerts</text>
+
+    <!-- Triage -->
+    <rect x="510" y="160" width="150" height="90" rx="10" fill="url(#cardBg)" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="585" y="190" text-anchor="middle" fill="#e8ecf4" font-size="14" font-weight="600">2 · Triage</text>
+    <text x="585" y="212" text-anchor="middle" fill="#9aa3b8" font-size="12">Score 0–100,</text>
+    <text x="585" y="230" text-anchor="middle" fill="#9aa3b8" font-size="12">verdict + reasoning</text>
+
+    <!-- Enrich -->
+    <rect x="690" y="160" width="150" height="90" rx="10" fill="url(#cardBg)" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="765" y="190" text-anchor="middle" fill="#e8ecf4" font-size="14" font-weight="600">3 · Enrich</text>
+    <text x="765" y="212" text-anchor="middle" fill="#9aa3b8" font-size="12">IOC threat-intel</text>
+    <text x="765" y="230" text-anchor="middle" fill="#9aa3b8" font-size="12">lookup</text>
+
+    <!-- Correlate -->
+    <rect x="330" y="290" width="150" height="90" rx="10" fill="url(#cardBg)" stroke="#a855f7" stroke-width="1.5"/>
+    <text x="405" y="320" text-anchor="middle" fill="#e8ecf4" font-size="14" font-weight="600">4 · Correlate</text>
+    <text x="405" y="342" text-anchor="middle" fill="#9aa3b8" font-size="12">Group related</text>
+    <text x="405" y="360" text-anchor="middle" fill="#9aa3b8" font-size="12">alerts → incidents</text>
+
+    <!-- Brief -->
+    <rect x="510" y="290" width="150" height="90" rx="10" fill="url(#cardBg)" stroke="#22c55e" stroke-width="1.5"/>
+    <text x="585" y="320" text-anchor="middle" fill="#e8ecf4" font-size="14" font-weight="600">5 · Brief</text>
+    <text x="585" y="342" text-anchor="middle" fill="#9aa3b8" font-size="12">Incident summary</text>
+    <text x="585" y="360" text-anchor="middle" fill="#9aa3b8" font-size="12">+ action plan</text>
+
+    <!-- Queue -->
+    <rect x="690" y="290" width="150" height="90" rx="10" fill="url(#cardBg)" stroke="#06b6d4" stroke-width="1.5"/>
+    <text x="765" y="320" text-anchor="middle" fill="#e8ecf4" font-size="14" font-weight="600">6 · Queue</text>
+    <text x="765" y="342" text-anchor="middle" fill="#9aa3b8" font-size="12">Critical-first</text>
+    <text x="765" y="360" text-anchor="middle" fill="#9aa3b8" font-size="12">prioritized feed</text>
+
+    <!-- pipeline arrows -->
+    <line x1="480" y1="205" x2="505" y2="205" stroke="#8b93a7" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="660" y1="205" x2="685" y2="205" stroke="#8b93a7" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="765" y1="250" x2="765" y2="285" stroke="#8b93a7" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="690" y1="335" x2="665" y2="335" stroke="#8b93a7" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="510" y1="335" x2="485" y2="335" stroke="#8b93a7" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="405" y1="380" x2="405" y2="430" stroke="#8b93a7" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="580" y="452" text-anchor="middle" fill="#8b93a7" font-size="12">Prioritized queue API → dashboard</text>
+  </g>
+
+  <!-- Nemotron fast -->
+  <g>
+    <rect x="300" y="540" width="260" height="130" rx="12" fill="url(#cardBg)" stroke="#76b900" stroke-width="1.5"/>
+    <text x="430" y="570" text-anchor="middle" fill="#e8ecf4" font-size="15" font-weight="600">NVIDIA Nemotron</text>
+    <text x="430" y="592" text-anchor="middle" fill="#9aa3b8" font-size="13">Nano 30B · fast triage</text>
+    <text x="430" y="614" text-anchor="middle" fill="#9aa3b8" font-size="12">Per-alert scoring,</text>
+    <text x="430" y="632" text-anchor="middle" fill="#9aa3b8" font-size="12">cheap &amp; low-latency</text>
+    <text x="430" y="656" text-anchor="middle" fill="#76b900" font-size="11">via Nebius Token Factory</text>
+  </g>
+
+  <!-- Nemotron reasoning -->
+  <g>
+    <rect x="600" y="540" width="260" height="130" rx="12" fill="url(#cardBg)" stroke="#76b900" stroke-width="1.5"/>
+    <text x="730" y="570" text-anchor="middle" fill="#e8ecf4" font-size="15" font-weight="600">NVIDIA Nemotron</text>
+    <text x="730" y="592" text-anchor="middle" fill="#9aa3b8" font-size="13">Ultra 550B · reasoning</text>
+    <text x="730" y="614" text-anchor="middle" fill="#9aa3b8" font-size="12">Incident briefs &amp;</text>
+    <text x="730" y="632" text-anchor="middle" fill="#9aa3b8" font-size="12">response plans</text>
+    <text x="730" y="656" text-anchor="middle" fill="#76b900" font-size="11">via Nebius Token Factory</text>
+  </g>
+
+  <!-- Tavily -->
+  <g>
+    <rect x="900" y="130" width="200" height="150" rx="12" fill="url(#cardBg)" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="1000" y="160" text-anchor="middle" fill="#e8ecf4" font-size="16" font-weight="600">Tavily</text>
+    <text x="1000" y="188" text-anchor="middle" fill="#9aa3b8" font-size="13">Live threat-intel</text>
+    <text x="1000" y="208" text-anchor="middle" fill="#9aa3b8" font-size="13">search for IOCs</text>
+    <text x="1000" y="236" text-anchor="middle" fill="#9aa3b8" font-size="13">MITRE ATT&amp;CK,</text>
+    <text x="1000" y="256" text-anchor="middle" fill="#9aa3b8" font-size="13">blogs, reports</text>
+  </g>
+
+  <!-- Dashboard -->
+  <g>
+    <rect x="900" y="330" width="200" height="150" rx="12" fill="url(#cardBg)" stroke="#06b6d4" stroke-width="1.5"/>
+    <text x="1000" y="360" text-anchor="middle" fill="#e8ecf4" font-size="16" font-weight="600">React Dashboard</text>
+    <text x="1000" y="388" text-anchor="middle" fill="#9aa3b8" font-size="13">Critical-first queue</text>
+    <text x="1000" y="408" text-anchor="middle" fill="#9aa3b8" font-size="13">Alert detail + intel</text>
+    <text x="1000" y="428" text-anchor="middle" fill="#9aa3b8" font-size="13">Incident correlation</text>
+    <text x="1000" y="456" text-anchor="middle" fill="#9aa3b8" font-size="13">Reasoning visible</text>
+  </g>
+
+  <!-- connecting arrows -->
+  <line x1="240" y1="205" x2="295" y2="205" stroke="#8b93a7" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="585" y1="250" x2="520" y2="535" stroke="#76b900" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+  <line x1="640" y1="380" x2="700" y2="535" stroke="#76b900" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+  <line x1="840" y1="205" x2="895" y2="205" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="900" y1="280" x2="865" y2="280" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+  <line x1="860" y1="405" x2="895" y2="405" stroke="#06b6d4" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <text x="330" y="530" fill="#76b900" font-size="11">powers triage</text>
+  <text x="660" y="530" fill="#76b900" font-size="11">powers briefs</text>
+  <text x="845" y="196" fill="#f59e0b" font-size="11">enriches</text>
+  <text x="862" y="396" fill="#06b6d4" font-size="11">serves</text>
+</svg>
